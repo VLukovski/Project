@@ -8,39 +8,25 @@ import javax.persistence.Id;
 @Entity
 public class Body {
 	public Body() {
-		
+
 	}
-	
-	public Body(double x, double y, double vx, double vy, double mass) {
-		this.x = x;
-		this.y = y;
-		this.vx = vx;
-		this.vy = vy;
+
+	public Body(double posX, double posY, double velX, double velY, double mass) {
+		this.posX = posX;
+		this.posY = posY;
+		this.velX = velX;
+		this.velY = velY;
 		this.mass = mass;
 	}
-	
+
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	private Long objectId;
-	
-	private double x, y;
-	private double vx, vy;
-	private double fx, fy;
+
+	private double posX, posY;
+	private double velX, velY;
+	private double forceX, forceY;
 	private double mass;
-	
-	public double getDistance(Body second) {
-		return Math.sqrt(Math.pow((x - second.x), 2) + Math.pow((y - second.y), 2));
-	}
-	
-	public void addForces(Body second) {
-		double G = 1;
-		double dist = getDistance(second);
-		double force = G * (mass * second.mass) / (dist * dist);
-		second.fx = force * (x - second.x) / dist;
-		second.fy = force * (y - second.y) / dist;
-		fx = force * (second.x - x) / dist;
-		fy = force * (second.y - y) / dist;
-	}
 
 	public Long getObjectId() {
 		return objectId;
@@ -50,52 +36,77 @@ public class Body {
 		this.objectId = objectId;
 	}
 
-	public double getX() {
-		return x;
+	public double getPosX() {
+		return posX;
 	}
 
-	public void setX(double x) {
-		this.x = x;
+	public void setPosX(double posX) {
+		this.posX = posX;
+	}
+	
+	public void addPosX(double change) {
+		posX += change;
 	}
 
-	public double getY() {
-		return y;
+	public double getPosY() {
+		return posY;
 	}
 
-	public void setY(double y) {
-		this.y = y;
+	public void setPosY(double posY) {
+		this.posY = posY;
+	}
+	
+	public void addPosY(double change) {
+		posY += change;
 	}
 
-	public double getVx() {
-		return vx;
+	public double getVelX() {
+		return velX;
 	}
 
-	public void setVx(double vx) {
-		this.vx = vx;
+	public void setVelX(double velX) {
+		this.velX = velX;
+	}
+	
+	public void addVelX(double change) {
+		velX += change;
 	}
 
-	public double getVy() {
-		return vy;
+	public double getVelY() {
+		return velY;
 	}
 
-	public void setVy(double vy) {
-		this.vy = vy;
+	public void setVelY(double velY) {
+		this.velY = velY;
+	}
+	
+	public void addVelY(double change) {
+		velY += change;
 	}
 
-	public double getFx() {
-		return fx;
+	public double getForceX() {
+		return forceX;
 	}
 
-	public void setFx(double fx) {
-		this.fx = fx;
+	public void setForceX(double forceX) {
+		this.forceX = forceX;
+	}
+	
+	public void addForceX(double forceX) {
+		this.forceX =+ forceX;
 	}
 
-	public double getFy() {
-		return fy;
+
+	public double getForceY() {
+		return forceY;
 	}
 
-	public void setFy(double fy) {
-		this.fy = fy;
+	public void setForceY(double forceY) {
+		this.forceY = forceY;
+	}
+	
+	public void addForceY(double forceY) {
+		this.forceY =+ forceY;
 	}
 
 	public double getMass() {
