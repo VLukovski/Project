@@ -10,7 +10,7 @@ public class BodyPhysics {
 	public static void addForces(Body first, Body second) {
 		double G = 1;
 		dist = Math.sqrt(
-				Math.pow((first.getPosX() - second.getPosX()), 2) + Math.pow((first.getPosY() - second.getPosY()), 2));
+				Math.pow((first.getPosX() - second.getPosX()), 2) + Math.pow((first.getPosY() - second.getPosY()), 2)) + 1;
 		double force = G * (first.getMass() * second.getMass()) / (dist * dist);
 		second.addForceX(force * (first.getPosX() - second.getPosX()) / dist);
 		second.addForceY(force * (first.getPosY() - second.getPosY()) / dist);

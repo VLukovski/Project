@@ -13,6 +13,7 @@ import javax.ws.rs.Produces;
 
 import com.qa.business.service.BodyService;
 
+@Path("/body")
 public class BodyEndpoint {
 
 	@Inject

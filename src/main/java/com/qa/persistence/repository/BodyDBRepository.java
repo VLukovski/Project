@@ -38,6 +38,7 @@ public class BodyDBRepository implements BodyRepository {
 		
 		BufferedImage image = new BufferedImage(250, 250, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D gfx = image.createGraphics();
+		gfx.setBackground(new Color(255, 255, 255));
 		gfx.translate(125, 125);
 		for (Body body : system) {
 			gfx.fillOval((int) Math.round(body.getPosX()), (int) Math.round(body.getPosY()), 2, 2);
