@@ -39,8 +39,8 @@ public class Tests {
 	@Test
 	public void addForcesTest() {
 		BodyPhysics.addForces(b1, b2);
-		assertEquals(b1.getForceX(), -b2.getForceX(), 0.05);
-		assertEquals((130 * (10. - 50)) / (50 * 50 * 50), b1.getForceY(), 0.0001);
+		assertEquals(b1.getForceX(), -b2.getForceX(), 0.01);
+		assertEquals((130 * (10. - 50)) / (50 * 50 * 50), b1.getForceY(), 0.01);
 	}
 	
 	@Test
