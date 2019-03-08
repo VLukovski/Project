@@ -5,16 +5,18 @@ import java.util.List;
 import com.qa.persistence.domain.Body;
 
 public class BodyPhysics {
+	static double dist;
 	
 	public static void addForces(Body first, Body second) {
 		double G = 1;
-		double dist = Math.sqrt(
+		dist = Math.sqrt(
 				Math.pow((first.getPosX() - second.getPosX()), 2) + Math.pow((first.getPosY() - second.getPosY()), 2));
 		double force = G * (first.getMass() * second.getMass()) / (dist * dist);
 		second.addForceX(force * (first.getPosX() - second.getPosX()) / dist);
 		second.addForceY(force * (first.getPosY() - second.getPosY()) / dist);
 		first.addForceX(force * (second.getPosX() - first.getPosX()) / dist);
 		first.addForceY(force * (second.getPosY() - first.getPosY()) / dist);
+
 	}
 	
 	public static void simulateStep(List<Body> system, double timeStep) {
