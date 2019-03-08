@@ -33,10 +33,10 @@ public class BodyEndpoint {
 		return service.createBody(body);
 	}
 
-	@Path("/getBody/{id}")
+	@Path("/getABody/{id}")
 	@GET
 	@Produces({ "application/json" })
-	public String getBody(@PathParam("id") Long id) {
+	public String getABody(@PathParam("id") Long id) {
 		return service.getABody(id);
 	}
 
@@ -59,5 +59,9 @@ public class BodyEndpoint {
 	@Produces({ "application/json" })
 	public String removeBody(@PathParam("id") Long id) {
 		return service.removeBody(id);
+	}
+	
+	public void setService(BodyService service) {
+		this.service = service;
 	}
 }

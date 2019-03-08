@@ -35,7 +35,7 @@ public class BodyDBRepository implements BodyRepository {
 	public String getNextState(double timeStep) throws IOException {
 		List<Body> system = (ArrayList<Body>) manager.createQuery("SELECT b FROM Body b").getResultList();
 		BodyPhysics.simulateStep(system, timeStep);
-		
+
 		BufferedImage image = new BufferedImage(250, 250, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D gfx = image.createGraphics();
 		gfx.translate(125, 125);
@@ -63,7 +63,7 @@ public class BodyDBRepository implements BodyRepository {
 		Body aBody = util.getObjectForJson(body, Body.class);
 		if (manager.contains(manager.find(Body.class, id))) {
 			Body dbBody = manager.find(Body.class, id);
-			//TODO
+			// TODO
 			return "{\"message\": \"body has been sucessfully updated\"}";
 		}
 		return "{\"message\": \"this body does not exist\"}";
@@ -88,4 +88,13 @@ public class BodyDBRepository implements BodyRepository {
 	public String getABody(Long id) {
 		return util.getJsonForObject(manager.find(Body.class, id));
 	}
+
+	public void setUtil(JSONUtil util) {
+		this.util = util;
+	}
+
+	public void setManager(EntityManager manager) {
+		this.manager = manager;
+	}
+
 }

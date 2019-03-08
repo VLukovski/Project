@@ -51,4 +51,8 @@ public class AccountEndpoint {
 	public String deleteAccount(@PathParam("id") Integer id) {
 		return service.deleteAccount(id);
 	}
+	
+	public void setService(AccountService service) {
+		this.service = service;
+	}
 }

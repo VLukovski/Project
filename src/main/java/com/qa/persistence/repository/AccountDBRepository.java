@@ -72,4 +72,12 @@ public class AccountDBRepository implements AccountRepository {
 		return "{\"message\": \"this account does not exist\"}";
 	}
 
+	public void setUtil(JSONUtil util) {
+		this.util = util;
+	}
+
+	public void setManager(EntityManager manager) {
+		this.manager = manager;
+	}
+
 }

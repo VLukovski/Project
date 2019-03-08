@@ -48,4 +48,8 @@ public class BodyServiceImpl implements BodyService {
 		return repo.getABody(id);
 	}
 
+	public void setRepository(BodyRepository repo) {
+		this.repo = repo;
+	}
+
 }

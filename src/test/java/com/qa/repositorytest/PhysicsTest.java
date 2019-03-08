@@ -1,4 +1,4 @@
-package Testing;
+package com.qa.repositorytest;
 
 import static org.junit.Assert.*;
 
@@ -15,7 +15,7 @@ import com.qa.persistence.repository.BodyPhysics;
 
 
 
-public class Tests {
+public class PhysicsTest {
 
 	Body b1;
 	Body b2;

@@ -38,4 +38,7 @@ public class AccountServiceImpl implements AccountService {
 		return repo.deleteAccount(id);
 	}
 
+	public void setRepository(AccountRepository repo) {
+		this.repo = repo;
+	}
 }
