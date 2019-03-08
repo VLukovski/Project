@@ -38,8 +38,9 @@ public class BodyDBRepository implements BodyRepository {
 		
 		BufferedImage image = new BufferedImage(250, 250, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D gfx = image.createGraphics();
-		gfx.setBackground(new Color(255, 255, 255));
 		gfx.translate(125, 125);
+		gfx.setBackground(new Color(255, 255, 255));
+		gfx.setColor(new Color(0, 0, 255));
 		for (Body body : system) {
 			gfx.fillOval((int) Math.round(body.getPosX()), (int) Math.round(body.getPosY()), 2, 2);
 		}
@@ -61,7 +62,8 @@ public class BodyDBRepository implements BodyRepository {
 	public String updateBody(Long id, String body) {
 		Body aBody = util.getObjectForJson(body, Body.class);
 		if (manager.contains(manager.find(Body.class, id))) {
-			// BIG TODO
+			Body dbBody = manager.find(Body.class, id);
+			//TODO
 			return "{\"message\": \"body has been sucessfully updated\"}";
 		}
 		return "{\"message\": \"this body does not exist\"}";
