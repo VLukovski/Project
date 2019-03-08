@@ -1,77 +1,88 @@
 package com.qa.persistence.repository;
 
+import static javax.transaction.Transactional.TxType.REQUIRED;
+import static javax.transaction.Transactional.TxType.SUPPORTS;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Base64;
+import java.util.Collection;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+
 import com.qa.persistence.domain.Body;
+import com.qa.util.JSONUtil;
 
+@Transactional(SUPPORTS)
 public class BodyDBRepository implements BodyRepository {
-	
-	List<Body> system = new ArrayList<Body>();
-	Long time = 0L;
-	
-	public double getDistance(Body first, Body second) {
-		return Math.sqrt(
-				Math.pow((first.getPosX() - second.getPosX()), 2) + Math.pow((first.getPosY() - second.getPosY()), 2));
-	}
 
-	public void addForces(Body first, Body second) {
-		double G = 1;
-		double dist = getDistance(first, second);
-		double force = G * (first.getMass() * second.getMass()) / (dist * dist);
-		second.addForceX(force * (first.getPosX() - second.getPosX()) / dist);
-		second.addForceY(force * (first.getPosY() - second.getPosY()) / dist);
-		first.addForceX(force * (second.getPosX() - first.getPosX()) / dist);
-		first.addForceY(force * (second.getPosY() - first.getPosY()) / dist);
-	}
-	
-	public List<Body> getSystem() {
-		return system;
-	}
+	@PersistenceContext(unitName = "primary")
+	private EntityManager manager;
 
-	public void addToSystem(Body body) {
-		system.add(body);
-	}
+	@Inject
+	private JSONUtil util;
 
-	public void simulateStep(double timeStep) {
-		for (int i = 0; i < system.size(); i++) {
-			system.get(i).setForceX(0);
-			system.get(i).setForceY(0);
-		}
+	@Override
+	@Transactional(REQUIRED)
+	public String getNextState(double timeStep) throws IOException {
+		List<Body> system = (ArrayList<Body>) manager.createQuery("SELECT b FROM Body b").getResultList();
+		BodyPhysics.simulateStep(system, timeStep);
 		
-		for (int i = 0; i < system.size() - 1; i++) {
-			for (int j = i + 1; j < system.size(); j++) {
-				addForces(system.get(i), system.get(j));
-			}
+		BufferedImage image = new BufferedImage(250, 250, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D gfx = image.createGraphics();
+		gfx.translate(125, 125);
+		for (Body body : system) {
+			gfx.fillOval((int) Math.round(body.getPosX()), (int) Math.round(body.getPosY()), 2, 2);
 		}
-		
-		for (int i = 0; i < system.size(); i++) {
-			system.get(i).addVelX(timeStep * system.get(i).getForceX() / system.get(i).getMass());
-			system.get(i).addVelY(timeStep * system.get(i).getForceY() / system.get(i).getMass());
-			system.get(i).addPosX(timeStep * system.get(i).getVelX());
-			system.get(i).addPosY(timeStep * system.get(i).getVelY());
-			System.out.println("Particle " + i + " Position X/Y " + system.get(i).getPosX() + "/" + system.get(i).getPosY() + " Force sum X/Y " + system.get(i).getForceX() + "/" + system.get(i).getForceY());
-		}	
-		System.out.println("\n");
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		ImageIO.write(image, "jpg", outputStream);
+		return Base64.getEncoder().encodeToString(outputStream.toByteArray());
 	}
 
+	@Override
+	@Transactional(REQUIRED)
 	public String createBody(String body) {
-		// TODO Auto-generated method stub
-		return null;
+		Body aBody = util.getObjectForJson(body, Body.class);
+		manager.persist(aBody);
+		return "{\"message\": \"body has been sucessfully added\"}";
 	}
 
-	public String updateBody(String body) {
-		// TODO Auto-generated method stub
-		return null;
+	@Override
+	@Transactional(REQUIRED)
+	public String updateBody(Long id, String body) {
+		Body aBody = util.getObjectForJson(body, Body.class);
+		if (manager.contains(manager.find(Body.class, id))) {
+			// BIG TODO
+			return "{\"message\": \"body has been sucessfully updated\"}";
+		}
+		return "{\"message\": \"this body does not exist\"}";
 	}
 
-	public String removeBody(String body) {
-		// TODO Auto-generated method stub
-		return null;
+	@Override
+	@Transactional(REQUIRED)
+	public String removeBody(Long id) {
+		if (manager.contains(manager.find(Body.class, id))) {
+			manager.remove(manager.find(Body.class, id));
+			return "{\"message\": \"body has been sucessfully deleted\"}";
+		}
+		return "{\"message\": \"this body does not exist\"}";
 	}
 
+	@Override
 	public String getAllBodies() {
-		// TODO Auto-generated method stub
-		return null;
+		return util.getJsonForObject((Collection<Body>) manager.createQuery("SELECT b FROM Body b").getResultList());
+	}
+
+	@Override
+	public String getABody(Long id) {
+		return util.getJsonForObject(manager.find(Body.class, id));
 	}
 }

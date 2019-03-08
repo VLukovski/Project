@@ -1,20 +1,18 @@
 package com.qa.persistence.repository;
 
-import com.qa.persistence.domain.Body;
+import java.io.IOException;
 
 public interface BodyRepository {
-
-	public double getDistance(Body first, Body second);
-
-	public void addForces(Body first, Body second);
 	
-	public void simulateStep(double timeStep);
+	public String getNextState(double timeStep) throws IOException;
 	
 	public String createBody(String body);
 	
-	public String updateBody(String body);
+	public String updateBody(Long id, String body);
 	
-	public String removeBody(String body);
+	public String removeBody(Long id);
 	
 	public String getAllBodies();
+	
+	public String getABody(Long id);
 }
