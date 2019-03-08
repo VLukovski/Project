@@ -1,5 +1,7 @@
 package com.qa.rest;
 
+import java.io.IOException;
+
 import javax.inject.Inject;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -19,7 +21,7 @@ public class BodyEndpoint {
 	@Path("/getNextState/{timeStep}")
 	@GET
 	@Produces({ "application/json" })
-	public String getNextState(@PathParam("timeStep") Integer timeStep) {
+	public String getNextState(@PathParam("timeStep") Integer timeStep) throws IOException {
 		return service.getNextState(timeStep);
 	}
 

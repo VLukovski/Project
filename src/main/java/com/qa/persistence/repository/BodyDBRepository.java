@@ -3,10 +3,16 @@ package com.qa.persistence.repository;
 import static javax.transaction.Transactional.TxType.REQUIRED;
 import static javax.transaction.Transactional.TxType.SUPPORTS;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Collection;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -26,11 +32,19 @@ public class BodyDBRepository implements BodyRepository {
 
 	@Override
 	@Transactional(REQUIRED)
-	public String getNextState(double timeStep) {
+	public String getNextState(double timeStep) throws IOException {
 		List<Body> system = (ArrayList<Body>) manager.createQuery("SELECT b FROM Body b").getResultList();
 		BodyPhysics.simulateStep(system, timeStep);
-		String image = "";
-		return image;
+		
+		BufferedImage image = new BufferedImage(250, 250, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D gfx = image.createGraphics();
+		gfx.translate(125, 125);
+		for (Body body : system) {
+			gfx.fillOval((int) Math.round(body.getPosX()), (int) Math.round(body.getPosY()), 2, 2);
+		}
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		ImageIO.write(image, "jpg", outputStream);
+		return Base64.getEncoder().encodeToString(outputStream.toByteArray());
 	}
 
 	@Override
@@ -44,7 +58,7 @@ public class BodyDBRepository implements BodyRepository {
 	@Override
 	@Transactional(REQUIRED)
 	public String updateBody(Long id, String body) {
-		Body anBody = util.getObjectForJson(body, Body.class);
+		Body aBody = util.getObjectForJson(body, Body.class);
 		if (manager.contains(manager.find(Body.class, id))) {
 			// BIG TODO
 			return "{\"message\": \"body has been sucessfully updated\"}";

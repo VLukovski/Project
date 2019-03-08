@@ -1,10 +1,10 @@
 package com.qa.persistence.repository;
 
-import com.qa.persistence.domain.Body;
+import java.io.IOException;
 
 public interface BodyRepository {
 	
-	public String getNextState(double timeStep);
+	public String getNextState(double timeStep) throws IOException;
 	
 	public String createBody(String body);
 	

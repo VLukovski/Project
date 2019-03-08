@@ -1,5 +1,7 @@
 package com.qa.business.service;
 
+import java.io.IOException;
+
 import javax.inject.Inject;
 
 import com.qa.persistence.repository.BodyRepository;
@@ -14,7 +16,10 @@ public class BodyServiceImpl implements BodyService {
 	private JSONUtil util;
 
 	@Override
-	public String getNextState(double timeStep) {
+	public String getNextState(double timeStep) throws IOException {
+		if (timeStep > 10) {
+			timeStep = 10;
+		}
 		return repo.getNextState(timeStep);
 	}
 

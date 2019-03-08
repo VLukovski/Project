@@ -1,8 +1,10 @@
 package com.qa.business.service;
 
+import java.io.IOException;
+
 public interface BodyService {
 	
-	public String getNextState(double timeStep);
+	public String getNextState(double timeStep) throws IOException;
 	
 	public String createBody(String body);
 	
