@@ -15,21 +15,21 @@ class Simulation extends Component {
 		}
 		this.simulateStep = (e) => {
 			e.preventDefault();
-			axios.get("http://localhost:8080/SoloProject/api/body/getNextState/1").then(response => {
+			axios.get("http://35.198.109.158:8888/SoloProject/api/body/getNextState/1").then(response => {
 				console.log();
 				this.setState({ data: response.data });
 			});
 		}
 		this.simulateStep3 = (e) => {
 			e.preventDefault();
-			axios.get("http://localhost:8080/SoloProject/api/body/getNextState/3").then(response => {
+			axios.get("http://35.198.109.158:8888/SoloProject/api/body/getNextState/3").then(response => {
 				console.log(response.data);
 				this.setState({ data: response.data });
 			});
 		}
 		this.makeRandomBody = (e) => {
 			e.preventDefault();
-			axios.post("http://localhost:8080/SoloProject/api/body/createBody", { "posX": Math.random() * 200 - 100, "posY": Math.random() * 200 - 100, "velX": Math.random() * 6 - 3, "velY": Math.random() * 6 - 3, "mass": Math.random() * 30 + 10 }).then(response => {
+			axios.post("http://35.198.109.158:8888/SoloProject/api/body/createBody", { "posX": Math.random() * 200 - 100, "posY": Math.random() * 200 - 100, "velX": Math.random() * 6 - 3, "velY": Math.random() * 6 - 3, "mass": Math.random() * 30 + 10 }).then(response => {
 				console.log(response.data);
 			});
 		}
