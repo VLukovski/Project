@@ -54,11 +54,11 @@ public class BodyEndpoint {
 		return service.updateBody(id, body);
 	}
 
-	@Path("/deleteBody/{id}")
+	@Path("/removeBodies")
 	@DELETE
 	@Produces({ "application/json" })
-	public String removeBody(@PathParam("id") Long id) {
-		return service.removeBody(id);
+	public String removeBodies() {
+		return service.removeBodies();
 	}
 	
 	public void setService(BodyService service) {

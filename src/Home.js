@@ -6,11 +6,12 @@ import './App.css';
 import RoutingExample from './Router.js';
 
 class Home extends Component {
-    
+
   render() {
-    return (        
-        <div>
-		There was supposed to be a login page here but it broke
+    return (
+
+      <div>
+        <RoutingExample />
 		</div>
     );
   }

@@ -42,7 +42,7 @@ public class BodyDBRepository implements BodyRepository {
 		gfx.setBackground(new Color(0, 0, 0));
 		gfx.setColor(new Color(0, 0, 255));
 		for (Body body : system) {
-			gfx.fillOval((int) Math.round(body.getPosX()), (int) Math.round(body.getPosY()), 2, 2);
+			gfx.fillOval((int) Math.round(body.getPosX()), (int) Math.round(body.getPosY()), 5, 5);
 		}
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		ImageIO.write(image, "jpg", outputStream);
@@ -71,12 +71,11 @@ public class BodyDBRepository implements BodyRepository {
 
 	@Override
 	@Transactional(REQUIRED)
-	public String removeBody(Long id) {
-		if (manager.contains(manager.find(Body.class, id))) {
-			manager.remove(manager.find(Body.class, id));
-			return "{\"message\": \"body has been sucessfully deleted\"}";
+	public String removeBodies() {
+		for (Body b : (Collection<Body>) manager.createQuery("SELECT b FROM Body b").getResultList()) {
+			manager.remove(b);
 		}
-		return "{\"message\": \"this body does not exist\"}";
+		return "{\"message\": \"all bodies have been sucessfully deleted\"}";
 	}
 
 	@Override

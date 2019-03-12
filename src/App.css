@@ -24,3 +24,7 @@ p {
 	border-style: double;
 	padding: 20px 20px;
 }
+
+#Login {
+  align-items: center;
+}

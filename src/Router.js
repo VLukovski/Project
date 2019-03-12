@@ -6,29 +6,35 @@ import Home from './Home';
 import Simulation from './Simulation';
 import Database from './Database';
 import Login from './Login';
+import Accounts from './Accounts';
+import App from './App';
 
 
 function RoutingExample() {
   return (
     <Router>
       <div>
-      <h2>Simple N-Body Simulator</h2>
+        <h2>Simple N-Body Simulator</h2>
         <ul >
           <button>
-            <Link to="/">Home</Link>
+            <a href="/App">Logout</a>
           </button>
           <button>
             <Link to="/Simulation">Simulation</Link>
           </button>
           <button>
             <Link to="/Database">Database</Link>
-          </button>   
-          </ul>
+          </button>
+          <button>
+            <Link to="/Accounts">Accounts</Link>
+          </button>
+        </ul>
         <hr />
 
-        <Route exact path="/" component={Home} />
+        <Route path="/App" component={App} />
         <Route path="/Simulation" component={Simulation} />
         <Route path="/Database" component={Database} />
+        <Route path="/Accounts" component={Accounts} />
       </div>
     </Router>
   );

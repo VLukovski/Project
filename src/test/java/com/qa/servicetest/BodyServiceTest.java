@@ -57,8 +57,8 @@ public class BodyServiceTest {
 
 	@Test
 	public void test5() {
-		Mockito.when(repo.removeBody(Mockito.anyLong())).thenReturn(MOCK_VALUE);
-		assertEquals(MOCK_VALUE, service.removeBody(Mockito.anyLong()));
+		Mockito.when(repo.removeBodies()).thenReturn(MOCK_VALUE);
+		assertEquals(MOCK_VALUE, service.removeBodies());
 	}
 
 	@Test
