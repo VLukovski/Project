@@ -19,7 +19,7 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public String getAccount(Integer id) {
+	public String getAccount(Long id) {
 		return repo.getAccount(id);
 	}
 
@@ -29,13 +29,21 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public String updateAccount(Integer id, String account) {
+	public String updateAccount(Long id, String account) {
 		return repo.updateAccount(id, account);
 	}
 
 	@Override
-	public String deleteAccount(Integer id) {
+	public String deleteAccount(Long id) {
 		return repo.deleteAccount(id);
 	}
 
+	public void setRepository(AccountRepository repo) {
+		this.repo = repo;
+	}
+
+	@Override
+	public Boolean checkAccount(String input) {
+		return repo.checkAccount(input);
+	}
 }

@@ -10,7 +10,7 @@ public interface BodyRepository {
 	
 	public String updateBody(Long id, String body);
 	
-	public String removeBody(Long id);
+	public String removeBodies();
 	
 	public String getAllBodies();
 	

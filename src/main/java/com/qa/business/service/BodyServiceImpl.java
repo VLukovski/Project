@@ -34,8 +34,8 @@ public class BodyServiceImpl implements BodyService {
 	}
 
 	@Override
-	public String removeBody(Long id) {
-		return repo.removeBody(id);
+	public String removeBodies() {
+		return repo.removeBodies();
 	}
 
 	@Override
@@ -46,6 +46,10 @@ public class BodyServiceImpl implements BodyService {
 	@Override
 	public String getABody(Long id) {
 		return repo.getABody(id);
+	}
+
+	public void setRepository(BodyRepository repo) {
+		this.repo = repo;
 	}
 
 }

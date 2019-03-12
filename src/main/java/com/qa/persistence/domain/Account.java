@@ -13,6 +13,7 @@ public class Account {
 	}
 
 	public Account(Integer uniqueKey, String login, String password) {
+		this.uniqueKey = uniqueKey;
 		this.login = login;
 		this.password = password;
 	}

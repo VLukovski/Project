@@ -4,12 +4,14 @@ public interface AccountRepository {
 
 	public String createAccount(String account);
 
-	public String getAccount(Integer id);
+	public String getAccount(Long id);
 
 	public String getAllAccounts();
 
-	public String updateAccount(Integer id, String account);
+	public String updateAccount(Long id, String account);
 
-	public String deleteAccount(Integer id);
+	public String deleteAccount(Long id);
+	
+	public Boolean checkAccount(String input);
 
 }
