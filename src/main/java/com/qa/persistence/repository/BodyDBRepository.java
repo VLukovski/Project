@@ -45,7 +45,7 @@ public class BodyDBRepository implements BodyRepository {
 			gfx.fillOval((int) Math.round(body.getPosX()), (int) Math.round(body.getPosY()), 5, 5);
 		}
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-		ImageIO.write(image, "jpg", outputStream);
+		ImageIO.write(image, "png", outputStream);
 		return Base64.getEncoder().encodeToString(outputStream.toByteArray());
 	}
 

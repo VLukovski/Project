@@ -37,7 +37,7 @@ class Simulation extends Component {
 	render() {
 		return (
 			<div>
-				<img src={`data:image/jpeg;base64,${this.state.data}`} /> <br />
+				<img src={`data:image/png;base64,${this.state.data}`} /> <br />
 				<button onClick={this.simulateStep}>Step</button>
 				<button onClick={this.simulateStep3}>Step*3</button>
 				<button onClick={this.makeRandomBody}>RandomBody</button>
