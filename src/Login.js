@@ -13,7 +13,7 @@ class Login extends Component {
 			isLoggedIn: false
 		}
 		this.tryLogin = (e) => {
-			axios.post("http://localhost:8080/SoloProject/api/account/checkAccount", { "login": this.apiLogin.value, "password": this.apiPassword.value }).then(response => {
+			axios.post("http://35.198.109.158:8888/SoloProject/api/account/checkAccount", { "login": this.apiLogin.value, "password": this.apiPassword.value }).then(response => {
 				console.log(response.data);
 				if (response.data === true) {
 					this.setState({ isLoggedIn: true });

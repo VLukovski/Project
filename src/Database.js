@@ -13,13 +13,13 @@ class Database extends Component {
 			data: ""
 		}
 		this.addBody = (e) => {
-			axios.post("http://localhost:8080/SoloProject/api/body/createBody", { "posX": this.posx.value, "posY": this.posy.value, "velX": this.velx.value, "velY": this.vely.value, "mass": this.mass.value }).then(response => {
+			axios.post("http://35.198.109.158:8888/SoloProject/api/body/createBody", { "posX": this.posx.value, "posY": this.posy.value, "velX": this.velx.value, "velY": this.vely.value, "mass": this.mass.value }).then(response => {
 				console.log(response.data);
 				this.setState({ data: response.data.message });
 			});
 		}
 		this.removeAll = (e) => {
-			axios.delete("http://localhost:8080/SoloProject/api/body/removeBodies").then(response => {
+			axios.delete("http://35.198.109.158:8888/SoloProject/api/body/removeBodies").then(response => {
 				console.log(response.data);
 				this.setState({ data: response.data.message });
 			});
