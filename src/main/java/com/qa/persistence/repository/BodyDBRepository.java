@@ -36,10 +36,10 @@ public class BodyDBRepository implements BodyRepository {
 		List<Body> system = (ArrayList<Body>) manager.createQuery("SELECT b FROM Body b").getResultList();
 		BodyPhysics.simulateStep(system, timeStep);
 
-		BufferedImage image = new BufferedImage(250, 250, BufferedImage.TYPE_INT_ARGB);
+		BufferedImage image = new BufferedImage(500, 500, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D gfx = image.createGraphics();
-		gfx.translate(125, 125);
-		gfx.setBackground(new Color(255, 255, 255));
+		gfx.translate(250, 250);
+		gfx.setBackground(new Color(0, 0, 0));
 		gfx.setColor(new Color(0, 0, 255));
 		for (Body body : system) {
 			gfx.fillOval((int) Math.round(body.getPosX()), (int) Math.round(body.getPosY()), 2, 2);
@@ -63,7 +63,7 @@ public class BodyDBRepository implements BodyRepository {
 		Body aBody = util.getObjectForJson(body, Body.class);
 		if (manager.contains(manager.find(Body.class, id))) {
 			Body dbBody = manager.find(Body.class, id);
-			// TODO
+			// Mostly useless for this case
 			return "{\"message\": \"body has been sucessfully updated\"}";
 		}
 		return "{\"message\": \"this body does not exist\"}";

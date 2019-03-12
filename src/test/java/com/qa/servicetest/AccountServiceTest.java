@@ -37,8 +37,8 @@ public class AccountServiceTest {
 
 	@Test
 	public void test2() {
-		Mockito.when(repo.getAccount(Mockito.anyInt())).thenReturn(MOCK_VALUE);
-		assertEquals(MOCK_VALUE, service.getAccount(Mockito.anyInt()));
+		Mockito.when(repo.getAccount(Mockito.anyLong())).thenReturn(MOCK_VALUE);
+		assertEquals(MOCK_VALUE, service.getAccount(Mockito.anyLong()));
 	}
 
 	@Test
@@ -49,13 +49,13 @@ public class AccountServiceTest {
 
 	@Test
 	public void test4() {
-		Mockito.when(repo.updateAccount(Mockito.anyInt(), Mockito.anyString())).thenReturn(MOCK_VALUE);
-		assertEquals(MOCK_VALUE, service.updateAccount(Mockito.anyInt(), Mockito.anyString()));
+		Mockito.when(repo.updateAccount(Mockito.anyLong(), Mockito.anyString())).thenReturn(MOCK_VALUE);
+		assertEquals(MOCK_VALUE, service.updateAccount(Mockito.anyLong(), Mockito.anyString()));
 	}
 
 	@Test
 	public void test5() {
-		Mockito.when(repo.deleteAccount(Mockito.anyInt())).thenReturn(MOCK_VALUE);
-		assertEquals(MOCK_VALUE, service.deleteAccount(Mockito.anyInt()));
+		Mockito.when(repo.deleteAccount(Mockito.anyLong())).thenReturn(MOCK_VALUE);
+		assertEquals(MOCK_VALUE, service.deleteAccount(Mockito.anyLong()));
 	}
 }

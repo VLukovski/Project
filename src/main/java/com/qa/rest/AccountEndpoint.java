@@ -27,7 +27,7 @@ public class AccountEndpoint {
 	@Path("/getAccount/{id}")
 	@GET
 	@Produces({ "application/json" })
-	public String getAccount(@PathParam("id") Integer id) {
+	public String getAccount(@PathParam("id") Long id) {
 		return service.getAccount(id);
 	}
 
@@ -41,18 +41,25 @@ public class AccountEndpoint {
 	@Path("/updateAccount/{id}")
 	@PUT
 	@Produces({ "application/json" })
-	public String updateAccount(@PathParam("id") Integer id, String account) {
+	public String updateAccount(@PathParam("id") Long id, String account) {
 		return service.updateAccount(id, account);
 	}
 
 	@Path("/deleteAccount/{id}")
 	@DELETE
 	@Produces({ "application/json" })
-	public String deleteAccount(@PathParam("id") Integer id) {
+	public String deleteAccount(@PathParam("id") Long id) {
 		return service.deleteAccount(id);
 	}
-	
+
 	public void setService(AccountService service) {
 		this.service = service;
+	}
+
+	@Path("/checkAccount")
+	@POST
+	@Produces({ "application/json" })
+	public Boolean checkAccount(String input) {
+		return service.checkAccount(input);
 	}
 }

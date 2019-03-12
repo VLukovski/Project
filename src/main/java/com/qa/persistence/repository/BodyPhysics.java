@@ -36,6 +36,12 @@ public class BodyPhysics {
 			system.get(i).addVelY(timeStep * system.get(i).getForceY() / system.get(i).getMass());
 			system.get(i).addPosX(timeStep * system.get(i).getVelX());
 			system.get(i).addPosY(timeStep * system.get(i).getVelY());
+			if (Math.abs(system.get(i).getPosX()) >= 250) {
+				system.get(i).setVelX(-system.get(i).getVelX());
+			}
+			if (Math.abs(system.get(i).getPosY()) >= 250) {
+				system.get(i).setVelY(-system.get(i).getVelY());
+			}
 		}
 	}
 }

@@ -37,8 +37,8 @@ public class AccountEndpointTest {
 
 	@Test
 	public void test2() {
-		Mockito.when(service.getAccount(Mockito.anyInt())).thenReturn(MOCK_VALUE);
-		assertEquals(MOCK_VALUE, endpoint.getAccount(Mockito.anyInt()));
+		Mockito.when(service.getAccount(Mockito.anyLong())).thenReturn(MOCK_VALUE);
+		assertEquals(MOCK_VALUE, endpoint.getAccount(Mockito.anyLong()));
 	}
 
 	@Test
@@ -49,13 +49,13 @@ public class AccountEndpointTest {
 
 	@Test
 	public void test4() {
-		Mockito.when(service.updateAccount(Mockito.anyInt(), Mockito.anyString())).thenReturn(MOCK_VALUE);
-		assertEquals(MOCK_VALUE, endpoint.updateAccount(Mockito.anyInt(), Mockito.anyString()));
+		Mockito.when(service.updateAccount(Mockito.anyLong(), Mockito.anyString())).thenReturn(MOCK_VALUE);
+		assertEquals(MOCK_VALUE, endpoint.updateAccount(Mockito.anyLong(), Mockito.anyString()));
 	}
 
 	@Test
 	public void test5() {
-		Mockito.when(service.deleteAccount(Mockito.anyInt())).thenReturn(MOCK_VALUE);
-		assertEquals(MOCK_VALUE, endpoint.deleteAccount(Mockito.anyInt()));
+		Mockito.when(service.deleteAccount(Mockito.anyLong())).thenReturn(MOCK_VALUE);
+		assertEquals(MOCK_VALUE, endpoint.deleteAccount(Mockito.anyLong()));
 	}
 }

@@ -33,7 +33,7 @@ public class AccountDBRepository implements AccountRepository {
 	}
 
 	@Override
-	public String getAccount(Integer id) {
+	public String getAccount(Long id) {
 		return util.getJsonForObject(manager.find(Account.class, id));
 	}
 
@@ -45,7 +45,7 @@ public class AccountDBRepository implements AccountRepository {
 
 	@Override
 	@Transactional(REQUIRED)
-	public String updateAccount(Integer id, String account) {
+	public String updateAccount(Long id, String account) {
 		Account anAccount = util.getObjectForJson(account, Account.class);
 		if (manager.contains(manager.find(Account.class, id))) {
 			if (anAccount.getLogin() != null) {
@@ -64,7 +64,7 @@ public class AccountDBRepository implements AccountRepository {
 
 	@Override
 	@Transactional(REQUIRED)
-	public String deleteAccount(Integer id) {
+	public String deleteAccount(Long id) {
 		if (manager.contains(manager.find(Account.class, id))) {
 			manager.remove(manager.find(Account.class, id));
 			return "{\"message\": \"account has been sucessfully deleted\"}";
@@ -78,6 +78,17 @@ public class AccountDBRepository implements AccountRepository {
 
 	public void setManager(EntityManager manager) {
 		this.manager = manager;
+	}
+
+	@Override
+	public Boolean checkAccount(String input) {
+		Account anAccount = util.getObjectForJson(input, Account.class);
+		if (((Collection<Account>) manager.createQuery("SELECT a FROM Account a WHERE a.login = :name AND a.password = :passwd")
+						.setParameter("name", anAccount.getLogin()).setParameter("passwd", anAccount.getPassword())
+						.getResultList()).size() != 0) {
+			return true;
+		}
+		return false;
 	}
 
 }

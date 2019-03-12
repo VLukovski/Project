@@ -3,15 +3,16 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import axios from 'axios';
 import './App.css';
 
-import Home from './Home';
 import RoutingExample from './Router.js';
 
-class App extends Component {
+class Home extends Component {
     
   render() {
     return (        
-        <RoutingExample />
+        <div>
+		There was supposed to be a login page here but it broke
+		</div>
     );
   }
 }
-export default App;
+export default Home;
